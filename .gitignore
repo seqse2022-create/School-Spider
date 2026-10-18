@@ -1,0 +1,10 @@
+@'
+__pycache__/
+*.py[cod]
+*.log
+.venv/
+venv/
+.env
+log/
+.pytest_cache/
+'@ | Set-Content "$sp\.gitignore" -Encoding utf8
