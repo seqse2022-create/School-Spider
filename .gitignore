@@ -8,3 +8,4 @@ venv/
 log/
 .pytest_cache/
 '@ | Set-Content "$sp\.gitignore" -Encoding utf8
+schools.db
