@@ -51,6 +51,7 @@ def 批量入库(记录: list[tuple], 数据库路径: str) -> int:
     conn.execute("PRAGMA foreign_keys=ON")
     try:
         with conn:
+            入库前 = conn.execute("SELECT COUNT(*) FROM schools").fetchone()[0]
             conn.executemany("""INSERT INTO schools (school_name, province, website) 
                              VALUES (?, ?, ?) 
                              ON CONFLICT(school_name) DO UPDATE SET
@@ -59,7 +60,8 @@ def 批量入库(记录: list[tuple], 数据库路径: str) -> int:
                              updated_at = datetime('now','localtime')
                              """,
                              记录)
-            return len(记录)
+            入库后 = conn.execute("SELECT COUNT(*) FROM schools").fetchone()[0]
+            return 入库后 - 入库前
     except sqlite3.Error as e:
         logger.error(f"入库失败,已回滚:{e}")
         return 0
