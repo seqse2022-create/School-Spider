@@ -128,3 +128,16 @@ wc -l data/schools.csv
 # 数据库行数与省份分布
 python -c "import sqlite3; c=sqlite3.connect('data/schools.db'); print(c.execute('SELECT COUNT(*) FROM schools').fetchone()); print(c.execute('SELECT province, COUNT(*) FROM schools GROUP BY province ORDER BY 2 DESC').fetchall())"
 ```
+
+数据洞察
+
+![各省招生单位数量](charts/各省招生单位数量.png)
+
+- 北京 151 所（占 16%），陕西 57、江苏 56，前三个省市占全国 26%
+- 全国 936 所中：大学 51.9%、学院 26.7%、科研院所 17.9%
+
+![北京 vs 全国](charts/北京与全国各类高校对比(不包括北京).png)
+
+- 北京的特殊性在科研院所：占北京 41.1%，是全国其他地区（13.4%）的 **3.1 倍**
+- 而北京的"大学"占比（25.8%）反而低于其他地区（56.9%）
+- 说明北京多的是"国家级科研院所"，不是"普通高校"
